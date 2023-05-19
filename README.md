@@ -1,61 +1,104 @@
-
-# Django-Minimal-CookieCutter
-
-Django minimal cookie cutter is a template or starting point for creating a new Django project with a minimal set of features and components. This cookie cutter is designed for developers who want to start with a basic Django project structure and add their own custom features as needed.
+<h1 align="center" id="title">Django cookiecutter</h1>
 
 
-## Authors
+<p id="description">Django-Cookiecutter is a quick-start project template for building Django web applications with the Django Rest Framework Postgres Redis Celery CircleCI GitLab CI and Docker. This project template provides a solid foundation for building scalable and maintainable web applications with Django and its ecosystem.</p>
 
-- [@Godfrey-Ndungu](https://github.com/Godfrey-Ndungu)
+<h2>🛠️ Installation Steps:</h2>
+
+<p>1. clone the repo</p>
+
+```
+git clone git@github.com:Godfrey-Ndungu/django-cookiecutter.git
+```
+
+<p>2. cd django-cookiecutter</p>
+
+<p>3. make makefile.sh executable</p>
+
+```
+chmod +x makefile.sh
+```
+
+<p>4. Run makefile</p>
+
+```
+./makefile.sh
+```
+
+  
+  
+<h2>💻 Built with</h2>
+
+Technologies used in the project:
+
+*   Django
+*   Django-rest-framework
+*   swager-ui
+*   redis
+*   postgresql
+*   docker
+*   celery
 
 
-## Features
+## Local Environment Variables
 
-1.Abstract Models:
+The following environment variables are required to run this project locally. Please set them with appropriate values:
 
--TrackableModel: Includes fields for creation and modification timestamps, as well as created by and modified by fields.  
--Singleton: A model that only allows one instance to be created.  
--TimestampedModel: Includes fields for creation and modification timestamps.
+`SECRET_KEY`
 
-2.Media files:  
--On development, media files is stored locally.  
--On production, media files is stored on AWS with CloudFront.
+`ALLOWED_HOSTS`
 
-3.Two settings:  
--One for development.  
--One for production.
+`DEBUG`
 
-4.Coverage:   
--Code coverage is measured and reported.
-Automation:
+`DB_NAME`
 
-5.tox is used to automate flake8, testing, and coverage reporting.  
+`DB_USER`
 
-6.A Makefile is included to help set up Python and the project locally, including installing Redis and Postgres.
+`DB_PASSWORD`
 
-7.Circle CI configs is included for the default branch development that merges to the main branch.  
+`DB_HOST`
 
-8.Ansible is used to set up the project using Docker.
+`DB_PORT`
 
-9.A custom error gives helpful json response when a 500 0r 404 error occurs.
 
-10.Django REST Framework.
+## Production Environment Variables
 
-11.API Redoc .
+`SECRET_KEY`
 
-12.Django Celery , with Redis configured in the project.
+`ALLOWED_HOSTS`
 
-13.Sphinx docs is installed and configured.
-Database based logging:
+`DEBUG`
 
-14.Logging is stored in the database.
+`DB_NAME`
 
-15.The signal loader , so you don't have to register your signals in the app file.
+`DB_USER`
 
-16.Email support with celery background task
-## Documentation
+`DB_PASSWORD`
 
-[Documentation](https://django-minimal-cookiecutter.readthedocs.io/en/latest/)
+`DB_HOST`
+
+`DB_PORT`
+
+`AWS_ACCESS_KEY_ID`
+
+`AWS_SECRET_ACCESS_KEY`
+
+`AWS_STORAGE_BUCKET_NAME`
+
+`AWS_QUERYSTRING_AUTH`
+
+`AWS_DEFAULT_ACL`
+
+`AWS_S3_SIGNATURE_VERSION`
+
+`AWS_S3_OBJECT_PARAMETERS`
+
+`PUBLIC_MEDIA_LOCATION`
+
+`MEDIAFILES_LOCATION`
+
+`AWS_CLOUDFRONT_DOMAIN`
+
 
 
 ## Run Locally
@@ -68,13 +111,12 @@ Clone the project
 ```
 
 
+## Run Tests
 
-
-## Running Tests
-
-To run tests, run the following command
+Clone the project
 
 ```bash
   tox
 ```
+
 

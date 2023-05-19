@@ -3,6 +3,9 @@ omit =
     */venv/*
     */manage.py
     */settings.py
+    */development.py
+    */storage_backends.py
+    */sphinx_build.py
     */wsgi.py
     */utils.py
     */signals.py

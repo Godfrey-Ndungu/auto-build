@@ -1,8 +1,9 @@
 from pathlib import Path
 from decouple import config
+from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = SECRET_KEY = config("SECRET_KEY",default='hdiohiodoidhioddontuseproductiondnhjodjiojdiod90')
+SECRET_KEY = SECRET_KEY = config("SECRET_KEY", default='hdiohiodoidhioddontuseproductiondnhjodjiojdiod90')  # noqa
 DEBUG = config("DEBUG", default=False, cast=bool)
 ALLOWED_HOSTS = []
 
@@ -19,11 +20,15 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "drf_spectacular",
     "drf_spectacular_sidecar",
-    "core",
+    "django_filters",
+    "corsheaders",
+    "apps.core",
+    "apps.accounts",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -85,16 +90,18 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+
     ],
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
     ],
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
     ],
-    "EXCEPTION_HANDLER": "core.views.custom_exception_handler",
 }
+
 SPECTACULAR_SETTINGS = {
     "TITLE": "",
     "DESCRIPTION": "",
@@ -117,7 +124,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s' # noqa
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'  # noqa
         },
         'simple': {
             'format': '%(levelname)s %(asctime)s %(message)s'
@@ -141,3 +148,31 @@ LOGGING = {
         }
     }
 }
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1*15),
+    "UPDATE_LAST_LOGIN": True,
+}
+
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+    "http://127.0.0.1:8000",
+]
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://\w+\.example\.com$",  # add custom domain
+]
+
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379",
+#     }
+# }
+
+# CACHE_MIDDLEWARE_SECONDS = 300  # 5 minutes
